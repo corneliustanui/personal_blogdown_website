@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Cornelius Tanui</title>
+    <link>https://corneliustanui.netlify.app/categories/r/</link>
+    <description>Recent content in R on Cornelius Tanui</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 02 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://corneliustanui.netlify.app/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dummy Post</title>
+      <link>https://corneliustanui.netlify.app/2024/01/02/dummy-post/</link>
+      <pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://corneliustanui.netlify.app/2024/01/02/dummy-post/</guid>
+      <description>Some awesome approach to solving an awesome problem in R/Julia/Python.</description>
+    </item>
+  </channel>
+</rss>

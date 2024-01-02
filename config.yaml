@@ -1,6 +1,6 @@
-baseurl: /
+baseurl: https://corneliustanui.netlify.app/
 languageCode: en-US
-title: A Hugo website
+title: Cornelius Tanui
 theme: hugo-lithium
 googleAnalytics: ''
 disqusShortname: ''
@@ -14,10 +14,12 @@ menu:
   main:
     - name: About
       url: /about/
-    - name: GitHub
-      url: https://github.com/rstudio/blogdown
-    - name: Twitter
-      url: https://twitter.com/rstudio
+    - name: Blog
+      url: /post/
+    - name: CV
+      url: /curriculum_vitae_cornelius_tanui.pdf/
+    - name: Projects
+      url: /projects/
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
@@ -29,11 +31,11 @@ params:
     - yaml
   highlightjsTheme: github
   highlightjsVersion: 9.12.0
-  logo:
-    alt: Logo
-    height: 50
-    url: logo.png
-    width: 50
+  # logo:
+  #   alt: Logo
+  #   height: 50
+  #   url: logo.png
+  #   width: 50
 markup:
   defaultMarkdownHandler: goldmark
   goldmark:
