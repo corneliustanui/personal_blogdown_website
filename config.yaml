@@ -8,34 +8,42 @@ ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$
   - _cache$
+  
 permalinks:
   post: /:year/:month/:day/:slug/
+  
 menu:
   main:
     - name: About
       url: /about/
+      weight: 1
     - name: Blog
       url: /post/
+      weight: 2
     - name: CV
       url: /curriculum_vitae_cornelius_tanui.pdf/
+      weight: 3
     - name: Projects
       url: /projects/
+      weight: 4
+      
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
   description: A website built through Hugo and blogdown.
-  favicon: favicon.ico
+  favicon: ct_logo_transparent.png
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
     - r
     - yaml
   highlightjsTheme: github
   highlightjsVersion: 9.12.0
-  # logo:
-  #   alt: Logo
-  #   height: 50
-  #   url: logo.png
-  #   width: 50
+  logo:
+    alt: Logo
+    height: 50
+    url: ct_logo_transparent.png
+    width: 50
+  
 markup:
   defaultMarkdownHandler: goldmark
   goldmark:
