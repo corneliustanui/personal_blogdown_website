@@ -1,6 +1,7 @@
 ---
-date: "2016-05-05T21:48:51-07:00"
 title: About
+author: Cornelius Tanui
+date: '2024-01-02'
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+[Cornelius Tanui](https://github.com/corneliustanui) is a highly skilled data professional with over 5 years of experience in public health, renewable energy, WASH, climate action, and clinical trials. He works full-time as a clinical data manager and Clinical Database Configurations Engineer at [Phastar](https://phastar.com/about-us), even though he has had impactful stints as a statistical analyst/consultant with various companies in the above-mentioned fields. 

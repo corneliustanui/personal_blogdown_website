@@ -1,4 +1,4 @@
-baseurl: /
+baseurl: https://corneliustanui.netlify.app/
 languageCode: en-US
 title: A Hugo website
 theme: hugo-lithium
@@ -14,10 +14,17 @@ menu:
   main:
     - name: About
       url: /about/
-    - name: GitHub
-      url: https://github.com/rstudio/blogdown
-    - name: Twitter
-      url: https://twitter.com/rstudio
+      weight: 1
+    - name: Blog
+      url: /post/
+      weight: 2
+    - name: CV
+      url: /curriculum_vitae_cornelius_tanui.pdf/
+      weight: 3
+    - name: Projects
+      url: /projects/
+      weight: 4
+      
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
