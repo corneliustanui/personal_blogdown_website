@@ -1,10 +1,10 @@
 ---
 title: Modelling CPI Using ARIMA(p,d,q)
 author: Cornelius Tanui
-date: '2024-01-05'
-slug: ARIMA
+date: '2024-01-09'
+slug: timeseries
 categories: []
-tags: [time_series]
+tags: []
 ---
 
 
@@ -31,6 +31,7 @@ library(forecast)
 library(tseries)
 library(ggTimeSeries)
 library(data.table)
+library(here)
 ```
 
 ### 3) Loading Data
@@ -38,7 +39,8 @@ library(data.table)
 
 ```r
 # import data
-CPI_Data <- read_excel("C:/Users/CORNELIUS/OneDrive/Folders/Data/KNBS/Historical CPI series 2020.xlsx")
+
+CPI_Data <- read_excel(here("./Data/Historical CPI series 2020.xlsx"))
 
 # view data
 head(CPI_Data, 10)
@@ -231,7 +233,7 @@ autoplot(CPI_Data, series = "Data") +
   autolayer(adjust_df, series = "Seasonally adjusted")
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/seasonality removed-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/seasonality_removed-1.png" width="672" />
 
 It is evident that the rate of consumption exponentially rose in the early ’80s to early ’90s. The sinusoidal aspect of seasonality is revealed by the plot below. Consumption goes down in April by a seasonal effect of 0.25 and goes up around July by an effect of 0.65 every year.
 
@@ -252,7 +254,7 @@ abline(h = seq(-.7,.7,.1),
        lty = 2)
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/focus on seasonality-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/focus_on_seasonality-1.png" width="672" />
 
 ### 7) Checking Normality Pictorially
 #### i) Stem and Leaf Plot
@@ -333,7 +335,7 @@ ggplot(LoggedCPI, aes(x = LoggedCPI)) +
   theme_classic()
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/logged distribution-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/logged_distribution-1.png" width="672" />
 
 The histogram above with a superimposed kernel density plot for CPI log-transgeomed gives a vague hint of a bimodal distribution. This needs further transformation.
 
@@ -350,7 +352,7 @@ ggplot(CPI_Data, aes(sample=CPI_Data))+
   theme_classic()
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/qq plot-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/qq_plot-1.png" width="672" />
 
 ### 8) Checking Normality Formally
 #### i) Jarque Bera Test
@@ -389,7 +391,7 @@ CPI_Data %>% gglagplot(lag = 20,
   theme_light()
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/Lagged Plots-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/Lagged_Plots-1.png" width="672" />
 
 #### b) ACF and PACF
 
@@ -406,7 +408,7 @@ CPI_Data %>% ggAcf(lag.max = 100,
   theme_classic()
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/ACF and PACF-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/ACF_and_PACF-1.png" width="672" />
 
 
 ```r
@@ -416,7 +418,7 @@ CPI_Data %>% ggPacf(lag.max = 100,
   theme_classic()
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/CPI PACF-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/CPI_PACF-1.png" width="672" />
 
 
 ### 10) Testing Stationarity Formally
@@ -520,7 +522,7 @@ Substituting the coefficients, this becomes:
 checkresiduals(CPIfit)
 ```
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/white noise-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/whitenoise-1.png" width="672" />
 
 ```
 ## 

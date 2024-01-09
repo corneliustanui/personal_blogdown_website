@@ -1,15 +1,15 @@
 ---
 title: Modelling CPI Using ARIMA(p,d,q)
 author: Cornelius Tanui
-date: '2024-01-05'
-slug: ARIMA
+date: '2024-01-09'
+slug: timeseries
 categories: []
-tags: [time_series]
+tags: []
 ---
 
 ```{r, label = 'setup', include = FALSE, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
-                      message = FALSE, 
+                      message = FALSE,
                       warning = FALSE)
 ```
 
@@ -34,13 +34,15 @@ library(forecast)
 library(tseries)
 library(ggTimeSeries)
 library(data.table)
+library(here)
 ```
 
 ### 3) Loading Data
 
 ```{r, label = 'load data'}
 # import data
-CPI_Data <- read_excel("C:/Users/CORNELIUS/OneDrive/Folders/Data/KNBS/Historical CPI series 2020.xlsx")
+
+CPI_Data <- read_excel(here("./Data/Historical CPI series 2020.xlsx"))
 
 # view data
 head(CPI_Data, 10)
@@ -189,7 +191,7 @@ The plot above shows the individual components of CPI;
 - Random error.
 Here, seasonal fluctuations are more evident. The trend has been smoothed, i.e. it is devoid of seasonality and random error. To explore seasonality:-
 
-```{r, label = 'seasonality removed'}
+```{r, label = 'seasonality_removed'}
 
 adjust_df <- CPI_Data - components[, 'season']
 
@@ -200,7 +202,7 @@ autoplot(CPI_Data, series = "Data") +
 
 It is evident that the rate of consumption exponentially rose in the early ’80s to early ’90s. The sinusoidal aspect of seasonality is revealed by the plot below. Consumption goes down in April by a seasonal effect of 0.25 and goes up around July by an effect of 0.65 every year.
 
-```{r, label = 'focus on seasonality'}
+```{r, label = 'focus_on_seasonality'}
 
 plot(window(components[,3],
             start = c(2016,1),
@@ -221,7 +223,7 @@ abline(h = seq(-.7,.7,.1),
 ### 7) Checking Normality Pictorially
 #### i) Stem and Leaf Plot
 
-```{r, label = 'stem plot'}
+```{r, label = 'stem_plot'}
 
 stem(CPI_Data, scale = 1, width = 105)
 
@@ -252,7 +254,7 @@ ggplot(CPI_Data, aes(x = CPI_Data)) +
 
 Histogram of Log Transformed CPI
 
-```{r, label = 'logged distribution'}
+```{r, label = 'logged_distribution'}
 
 LoggedCPI <- CPI_Data %>% log()  
   
@@ -277,7 +279,7 @@ The histogram above with a superimposed kernel density plot for CPI log-transgeo
 #### iii) Q-Q Plot
 The plot below clearly illustrates how far the CPI is from the normal distribution. QQ Plots compare observed data to standardized theoretical normal data. The closeness of the plot to straight line indicates the closeness of the observed data to being normally distributed. For our case, the CPI deviates away at the tails to form an S-curve that defies normality.
 
-```{r, label = 'qq plot'}
+```{r, label = 'qq_plot'}
 
 ggplot(CPI_Data, aes(sample=CPI_Data))+
   stat_qq(color = "maroon")+
@@ -291,7 +293,7 @@ ggplot(CPI_Data, aes(sample=CPI_Data))+
 ### 8) Checking Normality Formally
 #### i) Jarque Bera Test
 
-```{r, label = 'Jarque Bera Test'}
+```{r, label = 'Jarque_Bera_Test'}
 CPI_Data %>% jarque.bera.test() # From package "tseries"
 ```
 
@@ -308,7 +310,7 @@ Here, the p-value is smaller than 0.05 and thus we reject $H_0$
 
 The figure below shows plots of lags 1 to 20. The fact that there is a strong persistence of a straight line (autocorrelation) for lags above 20 excludes the dominance of an **MA(q)** in the series and gives a strong evidence for an **AR(p)**. This persistence is due to the strong correlation (0.987) at lag one. This property is also called long memory. However, the series cannot be simply an **AR(p)** since the order of such an **AR(p)** would be too large a number and _parsimony_ (idea of _Occult’s Razor_) would be violated. Therefore, the lagged plots give evidence of an **ARMA(p,q)** being the underlying best-case scenario.
 
-```{r, label = 'Lagged Plots'}
+```{r, label = 'Lagged_Plots'}
 
 CPI_Data %>% gglagplot(lag = 20, 
                        seasonal = TRUE) + 
@@ -324,7 +326,7 @@ The figure below is a correlogram of ACF and ACF of CPI for the first 80 lags. T
 
 The PACF cuts off immediately after the associated lag. This is typical of non-stationary processes.
 
-```{r, label = 'ACF and PACF'}
+```{r, label = 'ACF_and_PACF'}
 CPI_Data %>% ggAcf(lag.max = 100,
                    plot = TRUE) +
   labs(title = "CPI ACF")+
@@ -333,7 +335,7 @@ CPI_Data %>% ggAcf(lag.max = 100,
 
 ```
 
-```{r, label = 'CPI PACF'}
+```{r, label = 'CPI_PACF'}
 CPI_Data %>% ggPacf(lag.max = 100,
                     plot = TRUE) +
   labs(title = "CPI PACF")+
@@ -405,7 +407,7 @@ $$Y_t=α-0.7461Y_{t−1}-0.4174Y_{t−2}-0.8993ϵ_{t−1}-0.2587ϵ_{t−2}+0.804
 
 #### a) Check Residuals for White Noise
 
-```{r, label = 'white noise'}
+```{r, label = 'whitenoise'}
 
 checkresiduals(CPIfit)
 
